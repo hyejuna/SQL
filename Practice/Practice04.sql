@@ -92,3 +92,23 @@ from employees e, ( select department_id, avg(salary) salary
                     group by department_id) s
 where e.department_id = s.department_id
 and e.salary > s.salary;
+
+
+--문제8
+select  employee_id,
+        first_name,
+        salary,
+        hire_date
+from ( select rownum rn,
+              employee_id,
+              first_name,
+              salary,
+              hire_date
+       from ( select employee_id,
+                     first_name,
+                     salary,
+                     hire_date
+              from employees
+              order by hire_date asc))
+where rn >= 11
+and rn <=15 ;
